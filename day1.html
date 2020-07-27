@@ -1,0 +1,88 @@
+<script>
+    var buah=['apel','jeruk','melon']
+    var stok=[10,10,10]
+    var harga=[3000, 3000, 3000]
+    var cartbuah=[]
+    var menubelanja=true
+    function coba(x){
+        for(var i=0;i<buah.length;i++){
+                x+=`${i+1}.${buah[i]} || Stok=${stok[i]} || harga=${harga[i]}\n`
+    }alert(x)
+}
+    
+    while(menubelanja){
+        var backopsi
+    do {
+        var opsi=prompt('Pilih menu\n1.list Buah\n2.Tambah Buah\n3.Hapus Buah\n4.Belanja\n5.Exit')
+        if(!(opsi>=1 && opsi<5)){
+            alert('Pilih ulang opsi')
+        }
+    } while (!(opsi>=1 && opsi<5));
+        if(opsi==1){
+            var pilihbuah=''
+
+            coba(pilihbuah)
+            
+        }else if(opsi==2){
+            var tambahbuah=prompt('Masukan nama buah')
+            buah.push(tambahbuah)
+            var tambahstok=prompt('Masukan jumlah stok')
+            stok.push(tambahstok)
+            var tambahharga=prompt('Masukan harga buah')
+            harga.push(tambahharga)
+            var tambah=''
+            
+            coba(tambah)
+           
+        }else if(opsi==3){
+            var output=''
+
+            coba(output)
+            var pilihedit
+         do {
+                pilihedit=prompt(`mau hapus yang mana:\n${output}`)
+            }while (!(pilihedit>=1 &&pilihedit<=buah.length));
+            var buahedit=prompt('ganti buah '+buah[pilihedit-1]+' jadi?')
+            var hargaedit=prompt('ganti harganya jadi ?')
+            var stokedit=prompt('ganti stok jadim?')
+            buah.splice(pilihedit-1,1,buahedit)
+            stok.splice(pilihedit-1,1,stokedit)
+            harga.splice(pilihedit-1,1,hargaedit)
+            alert('berhasil mengedit') 
+        }else if(opsi==4) {
+            for(i=0;i<buah.length;i++){ // For loop utk auto delete buah saat stok 0
+                        if(stok[i]==0){
+                            alert('ALERT! Buah ' + buah[i] + ' dihapus dari daftar karena stok habis')
+                            buah.splice(i,1) // CARI CARA UTK HAPUS PAKE LOOP
+                            stok.splice(i,1)
+                            harga.splice(i,1)
+                        }
+                    }
+            
+            for(let i=0;i<buah.length;i++){ 
+                var kondisi=true
+                while(kondisi){
+                    cartbuah[i] = parseInt(prompt('Masukkan jumlah ' + buah[i]))
+               if(cartbuah[i]>stok[i]){
+                   alert(`Maaf stok ${buah[i]} hanya ${stok[i]}`)
+               }else if(!(cartbuah[i]>0)) { 
+               alert('ERROR! Perhatikan input anda')
+            }else{
+               stok[i] -= cartbuah[i]
+               kondisi=false
+           }                          
+           }
+                }
+            var totalbelanja=0
+            var total=''
+            for(var i=0;i<buah.length;i++){
+                totalbelanja+=cartbuah[i]*harga[i]
+                total+=`${i+1}.${buah[i]} || Stok=${stok[i]} || harga=${harga[i]}= ${cartbuah[i]*harga[i]}\n`
+            }alert(`${total}\n total belanjaan= ${totalbelanja}`)
+        }else{
+            alert('selamat tinggal') 
+        } 
+        } 
+
+    
+</script>
